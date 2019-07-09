@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+#
+# abort, if a configuration file exists already already...
+#
+if [ -f "${DOCKER_CONFIG}config.json" ]; then
+    echo "Configuration file exists already."
+    exit 0
+fi
+
+#
+# Handle Gitlab CI Runner
+#
+if [ ! -z "${GITLAB_CI}" ]; then
+
+    echo "Detected a Gitlab CI Runner..."
+    echo "Generating kaniko configuration for use with the registry of the currently built Gitlab project."
+
+    cat > "${DOCKER_CONFIG}config.json" <<EOL
+{
+    "auths" : {
+        "${CI_REGISTRY}" : {
+            "username" : "${CI_REGISTRY_USER}",
+            "password" : "${CI_REGISTRY_PASSWORD}"
+        }
+    }
+}
+EOL
+
+    exit 0
+fi
+
+
+#
+# Autodetection failed
+#
+
+echo "Autodetecting the build environment failed. Aborting..."
+exit 1
