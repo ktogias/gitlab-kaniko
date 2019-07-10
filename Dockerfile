@@ -13,14 +13,10 @@ RUN \
   mkdir -p /busybox-integration && \
   mkdir -p /busybox-integration/bin && \
   mkdir -p /busybox-integration/lib && \
-  ls -al /bin && \
   ln -s /alpine/bin/busybox /busybox-integration/bin/ && \
   ln -s /alpine/bin/sh /busybox-integration/bin/ && \
   ln -s /alpine/bin/bash /busybox-integration/bin/ && \
-  ln -s /alpine/lib/ld-musl-x86_64.so.1 /busybox-integration/lib/ && \
-  ls -al /busybox-integration && \
-  ls -al /busybox-integration/bin && \
-  ls -al /busybox-integration/lib
+  ln -s /alpine/lib/ld-musl-x86_64.so.1 /busybox-integration/lib/
 
 # ------------------------------------------------------------------------------
 
