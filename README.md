@@ -1,5 +1,8 @@
 # Google kaniko v0.10.0 dockerized on Alpine Linux 3.10 for Gitlab CI Runners
 
+[![Pipeline Status](https://gitlab.com/griffinplus/gitlab-kaniko/badges/master/pipeline.svg)](https://gitlab.com/griffinplus/gitlab-kaniko/commits/master)
+[![Docker Pulls](https://img.shields.io/docker/pulls/griffinplus/gitlab-kaniko.svg)](https://hub.docker.com/r/griffinplus/gitlab-kaniko)
+
 ## Overview
 
 This projects builds a docker image containing [kaniko](https://github.com/GoogleContainerTools/kaniko)
