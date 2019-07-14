@@ -5,9 +5,15 @@ build:
     - docker:dind
   script:
     - docker version
-    - docker build -t $CI_REGISTRY_IMAGE:latest .
-    - docker tag $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - if [ "$CI_COMMIT_REF_NAME" != "master" ]; then exit 0; fi
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:latest
+    - if [ -z "$RELEASE_REGISTRY" ]; then exit 0; fi
+    - docker login -u $RELEASE_REGISTRY_USER -p $RELEASE_REGISTRY_PASSWORD $RELEASE_REGISTRY
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $RELEASE_REGISTRY_IMAGE:latest
+    - docker push $RELEASE_REGISTRY_IMAGE:latest
   only:
-    - master
+    - branches

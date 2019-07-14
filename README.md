@@ -60,5 +60,14 @@ The scripts in this project do not contain any hardcoded stuff. Everything is
 taken from the build environment, so after forking and running the CI pipeline
 you should be up and running.
 
-Keep in mind that you need to adjust the name of the images in the examples
-above accordingly.
+If you want your image to be pushed to an external container registry, e.g.
+the [Docker Hub](https://hub.docker.com), you can set the following environment
+variables on your CI pipeline:
+
+- `RELEASE_REGISTRY` (use `registry.hub.docker.com` for the *Docker Hub*)
+- `RELEASE_REGISTRY_IMAGE` (name of the image incl. registry, e.g. `registry.hub.docker.com/griffinplus/gitlab-kaniko`)
+- `RELEASE_REGISTRY_USER` (name of a user that is allowed to push the specified image)
+- `RELEASE_REGISTRY_PASSWORD` (password of the user that is allowed to push the specified image)
+
+After setting these variables, the next push to the *master* branch will trigger
+pushing the image to the specified container registry.
