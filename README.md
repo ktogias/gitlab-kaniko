@@ -50,3 +50,15 @@ build:
       --dockerfile Dockerfile
       --destination <registry>/<image_path>:latest
 ```
+
+## Customization
+
+If you want to customize the CI image to fit your requirements, or simply if you
+don't trust our images in the project's registry, you can fork this project and
+let Gitlab CI runners build your own copy of the image fully under your control.
+The scripts in this project do not contain any hardcoded stuff. Everything is
+taken from the build environment, so after forking and running the CI pipeline
+you should be up and running.
+
+Keep in mind that you need to adjust the name of the images in the examples
+above accordingly.
