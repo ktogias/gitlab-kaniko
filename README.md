@@ -54,6 +54,12 @@ build:
       --destination <registry>/<image_path>:latest
 ```
 
+The examples above pull the image from our Gitlab container registry
+(`registry.gitlab.com/griffinplus/gitlab-kaniko`). Alternatively you can pull it
+from the [Docker Hub](https://hub.docker.com/r/griffinplus/gitlab-kaniko) as well.
+Simply replace the image name with `registry.hub.docker.com/griffinplus/gitlab-kaniko:latest`
+or shorter `griffinplus/gitlab-kaniko:latest`.
+
 ## Customization
 
 If you want to customize the CI image to fit your requirements, or simply if you
@@ -61,7 +67,7 @@ don't trust our images in the project's registry, you can fork this project and
 let Gitlab CI runners build your own copy of the image fully under your control.
 The scripts in this project do not contain any hardcoded stuff. Everything is
 taken from the build environment, so after forking and running the CI pipeline
-you should be up and running.
+you should end up with the image in the container registry of your forked project.
 
 If you want your image to be pushed to an external container registry, e.g.
 the [Docker Hub](https://hub.docker.com), you can set the following environment
