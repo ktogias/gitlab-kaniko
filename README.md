@@ -38,8 +38,9 @@ build:
 ```
 
 If you want to push the image to some other registry, e.g. the [Docker Hub](https://hub.docker.com),
-you need to write a custom configuration for kaniko. Please replace `<registry>`,
-`<username>` and `<password>` accordingly:
+you need to write a custom configuration for kaniko. Note that if you provide your
+own configuration, you should use `/kaniko/executor` instead of `kaniko-build`.
+Please replace `<registry>`, `<username>` and `<password>` accordingly:
 
 ```yaml
 build:
@@ -48,7 +49,7 @@ build:
     name: registry.gitlab.com/griffinplus/gitlab-kaniko:latest
   script:
     - echo "{\"auths\":{\"<registry>\":{\"username\":\"<username>\",\"password\":\"<password>\"}}}" > /kaniko/.docker/config.json
-    - kaniko-build
+    - /kaniko/executor
       --context $CI_PROJECT_DIR
       --dockerfile Dockerfile
       --destination <registry>/<image_path>:latest
