@@ -1,7 +1,7 @@
-FROM golang:1.12
+FROM golang:1.14
 WORKDIR /go/src/github.com/GoogleContainerTools
 RUN \
-  git clone --branch v0.10.0 https://github.com/GoogleContainerTools/kaniko && \
+  git clone --branch v1.7.0 https://github.com/GoogleContainerTools/kaniko && \
   cd kaniko && \
   make GOARCH=amd64
 
@@ -24,7 +24,7 @@ RUN \
 
 FROM scratch
 COPY --from=0 /go/src/github.com/GoogleContainerTools/kaniko/out/executor /kaniko/executor
-COPY --from=0 /go/src/github.com/GoogleContainerTools/kaniko/files/ca-certificates.crt /kaniko/ssl/certs/
+COPY ca-certificates.crt /kaniko/ssl/certs/
 COPY --from=1 /busybox-integration /
 COPY --from=1 / /alpine/
 COPY target /alpine/
