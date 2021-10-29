@@ -1,0 +1,29 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: example
+  labels:
+    name: example
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+  namespace: example
+  labels:
+    app: example
+spec:
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: example
+        image: localhost:32000/example:{version}
+
